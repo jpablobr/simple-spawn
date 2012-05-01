@@ -35,7 +35,7 @@ The `Simple::Spawn` module can also be mixed in to classes and modules
 to include the `spawn` method in that namespace:
 
 ```ruby
-require simple/spawn'
+require simple/spawn
 
 class YourScriptClass
   include Simple::Spawn
