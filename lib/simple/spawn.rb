@@ -5,9 +5,9 @@ module Simple
     extend self
 
     def spawn cmd
-      commands = pipeify(cmd)
-
       tmp_in, tmp_out, pipe = $stdin, $stdout, []
+
+      commands = cmd.scan(/([^"'|]+)|["']([^"']+)["']/).flatten.compact
 
       commands.each_with_index do |cmd, index|
         program, *args = Shellwords.shellsplit(cmd)
@@ -27,10 +27,6 @@ module Simple
       end
 
       Process.waitall
-    end
-
-    def pipeify(line)
-      line.scan( /([^"'|]+)|["']([^"']+)["']/ ).flatten.compact
     end
 
     class Spawner
