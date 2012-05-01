@@ -26,7 +26,7 @@ It only requires a valid `shell` command as a string.
 
 
 ```ruby
-spawn('find . -type f -name '+what+' | sed "s/'+what+'/'+with+'/"')
+spawn('cat ./stars.txt | grep charlie | sed s/winning/bi-winning/')
 ```
 
 ### Simple::Spawn as a Mixin
@@ -41,7 +41,7 @@ class YourScriptClass
   include Simple::Spawn
 
   def replace(what, with)
-    spawn('find . -type f -name '+what+' | sed "s/'+what+'/'+with+'/"')
+    spawn("cat ./stars.txt | grep charlie | sed s/#{what}/#{with}/")
   end
 end
 ```
