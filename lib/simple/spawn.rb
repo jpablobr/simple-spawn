@@ -7,9 +7,7 @@ module Simple
     def spawn cmd
       commands = pipeify(cmd)
 
-      tmp_in = $stdin
-      tmp_out = $stdout
-      pipe = []
+      tmp_in, tmp_out, pipe = $stdin, $stdout, []
 
       commands.each_with_index do |cmd, index|
         program, *args = Shellwords.shellsplit(cmd)
