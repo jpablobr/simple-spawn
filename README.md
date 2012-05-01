@@ -24,23 +24,27 @@ Or install it yourself as:
 
 It only requires a valid `shell` command as a string.
 
-    spawn('find . -type f -name '+what+' | sed "s/'+what+'/'+with+'/"')
+
+```ruby
+spawn('find . -type f -name '+what+' | sed "s/'+what+'/'+with+'/"')
+```
 
 ### Simple::Spawn as a Mixin
 
 The `Simple::Spawn` module can also be mixed in to classes and modules
 to include the `spawn` method in that namespace:
 
-    require simple/spawn'
+```ruby
+require simple/spawn'
 
-    class YourScriptClass
-      include Simple::Spawn
+class YourScriptClass
+  include Simple::Spawn
 
-      def replace(what, with)
-        spawn('find . -type f -name '+what+' | sed "s/'+what+'/'+with+'/"')
-      end
-    end
-
+  def replace(what, with)
+    spawn('find . -type f -name '+what+' | sed "s/'+what+'/'+with+'/"')
+  end
+end
+```
 ## Contributing
 
 1. Fork it
