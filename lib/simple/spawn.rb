@@ -11,8 +11,8 @@ module Simple
       tmp_out = $stdout
       pipe = []
 
-      commands.each_with_index do |command, index|
-        program, *args = Shellwords.shellsplit(command)
+      commands.each_with_index do |cmd, index|
+        program, *args = Shellwords.shellsplit(cmd)
 
         if index+1 < commands.size
           pipe = IO.pipe
@@ -21,7 +21,7 @@ module Simple
           tmp_out = $stdout
         end
 
-        spawn_program(program, *args, tmp_out, tmp_in)
+        Spawner.new(program, *args, tmp_out, tmp_in).exec!
 
         tmp_out.close unless tmp_out == $stdout
         tmp_in.close unless tmp_in == $stdin
@@ -35,20 +35,35 @@ module Simple
       line.scan( /([^"'|]+)|["']([^"']+)["']/ ).flatten.compact
     end
 
-    def spawn_program(program, *args, tmp_out, tmp_in)
-      fork {
-        unless tmp_out == $stdout
-          $stdout.reopen(tmp_out)
-          tmp_out.close
-        end
+    class Spawner
 
-        unless tmp_in == $stdin
-          $stdin.reopen(tmp_in)
-          tmp_in.close
-        end
+      attr_reader :program, :args, :tmp_out, :tmp_in
 
-        exec program, *args
-      }
+      def initialize program, *args, tmp_out, tmp_in
+        @tmp_out = tmp_out
+        @tmp_in  = tmp_in
+        @program = program
+        @args    = *args
+      end
+
+      def exec!
+        fork {
+          close_out unless tmp_out == $stdout
+          close_in  unless tmp_in == $stdin
+          exec program, *args
+        }
+      end
+
+      private
+
+      def close_out
+        $stdout.reopen(tmp_out)
+        tmp_out.close
+      end
+      def close_in
+        $stdin.reopen(tmp_in)
+        tmp_in.close
+      end
     end
   end
 end
