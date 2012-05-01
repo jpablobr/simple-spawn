@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Simple-spawn by jpablobr</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Simple-spawn</h1>
+        <h2>Simple processes spawner that makes scripting UNIX pipes a breeze.</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/jpablobr/simple-spawn/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/jpablobr/simple-spawn/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/jpablobr/simple-spawn" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>Simple::Spawn <a href="http://travis-ci.org/jpablobr/simple-spawn"><img src="https://secure.travis-ci.org/jpablobr/simple-spawn.png?branch=master" alt="Build Status"></a>
+</h1>
+
+<p>Simple processes spawner that makes scripting UNIX pipes a breeze.</p>
+
+<p>Most of it was inspired by <a href="https://github.com/jstorimer/shirt">https://github.com/jstorimer/shirt</a> Thx! :)</p>
+
+<h2>Installation</h2>
+
+<p>Add this line to your application's Gemfile:</p>
+
+<pre><code>gem 'simple-spawn'
+</code></pre>
+
+<p>And then execute:</p>
+
+<pre><code>$ bundle
+</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre><code>$ gem install simple-spawn
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>It only requires a valid <code>shell</code> command as a string.</p>
+
+<div class="highlight">
+<pre><span class="n">spawn</span><span class="p">(</span><span class="s1">'cat ./stars.txt | grep charlie | sed s/winning/bi-winning/'</span><span class="p">)</span>
+</pre>
+</div>
+
+
+<h3>Simple::Spawn as a Mixin</h3>
+
+<p>The <code>Simple::Spawn</code> module can also be mixed in to classes and modules
+to include the <code>spawn</code> method in that namespace:</p>
+
+<div class="highlight">
+<pre><span class="nb">require</span> <span class="n">simple</span><span class="o">/</span><span class="n">spawn</span>
+
+<span class="k">class</span> <span class="nc">YourScriptClass</span>
+  <span class="kp">include</span> <span class="no">Simple</span><span class="o">::</span><span class="no">Spawn</span>
+
+  <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="n">what</span><span class="p">,</span> <span class="n">with</span><span class="p">)</span>
+    <span class="n">spawn</span><span class="p">(</span><span class="s2">"cat ./stars.txt | grep charlie | sed s/</span><span class="si">#{</span><span class="n">what</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">with</span><span class="si">}</span><span class="s2">/"</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre>
+</div>
+
+
+<h2>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Added some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol><h2>ACKNOWLEDGEMENTS</h2>
+
+<p>Copyright (c) by
+<a href="http://jpablobr.com">Jose Pablo Barrantes</a></p>
+
+<p>See the <code>COPYING</code> file for more information on license and redistribution.</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
