@@ -1,6 +1,7 @@
 #!/usr/bin/env rake
 require 'rake'
 require 'rake/testtask'
+require 'bundler/gem_tasks'
 
 namespace :test do
   Rake::TestTask.new do |t|
